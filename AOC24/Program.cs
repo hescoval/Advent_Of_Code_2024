@@ -9,7 +9,7 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        
+        Day01.Part02();
     }
 }
 

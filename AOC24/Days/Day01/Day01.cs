@@ -38,28 +38,39 @@ namespace AOC24.Days.Day01
         public static void Part02()
         {
             var Input = File.ReadAllLines("test.txt");
-            List<int> listA = [];
             List<int> listB = [];
+            Dictionary<int, int> dic = [];
 
+            var count = 0;
 
             //Parsing
             foreach (var line in Input)
             {
                 var split_line = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                int dig_1 = int.Parse(split_line[0]);
+                int dig_2 = int.Parse(split_line[1]);
 
-                listA.Add(int.Parse(split_line[0]));
-                listB.Add(int.Parse(split_line[1]));
+                
+                if(dic.ContainsKey(dig_1))
+                    dic[dig_1]++;
+                else
+                    dic.Add(dig_1, 1);
+
+                listB.Add(dig_2);
             }
 
-
-            var total = 0;
-            for (int i = 0; i < listA.Count; i++)
+            foreach (var number in listB)
             {
-                var count = listB.Count(x => x == listA[i]);
-                total += listA[i] * count;
+                if(dic.ContainsKey(number))
+                    count += number * dic[number];
             }
 
-            Console.WriteLine(total);
+            foreach(var key in dic.Keys)
+            {
+                Console.WriteLine($"{key} -> {dic[key]}");
+            }  
+
+            Console.WriteLine(count);
         }
     }
 }

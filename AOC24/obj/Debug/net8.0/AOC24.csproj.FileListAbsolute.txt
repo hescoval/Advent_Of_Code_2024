@@ -12,3 +12,4 @@ D:\Coding\Projects\AOC24\AOC24\obj\Debug\net8.0\refint\AOC24.dll
 D:\Coding\Projects\AOC24\AOC24\obj\Debug\net8.0\AOC24.pdb
 D:\Coding\Projects\AOC24\AOC24\obj\Debug\net8.0\AOC24.genruntimeconfig.cache
 D:\Coding\Projects\AOC24\AOC24\obj\Debug\net8.0\ref\AOC24.dll
+D:\Coding\Projects\AOC24\AOC24\obj\Debug\net8.0\AOC24.sourcelink.json
