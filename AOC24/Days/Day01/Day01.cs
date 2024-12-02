@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sandbox.day01
+namespace AOC24.Days.Day01
 {
-    internal class day01
+    internal class Day01
     {
 
         public static void Part01()
         {
             var Input = File.ReadAllLines("test.txt");
-            List<int> listA = new();
-            List<int> listB = new();
+            List<int> listA = [];
+            List<int> listB = [];
 
             //Parsing
-            foreach(var line in Input)
+            foreach (var line in Input)
             {
                 var split_line = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
@@ -38,8 +38,8 @@ namespace Sandbox.day01
         public static void Part02()
         {
             var Input = File.ReadAllLines("test.txt");
-            List<int> listA = new();
-            List<int> listB = new();
+            List<int> listA = [];
+            List<int> listB = [];
 
 
             //Parsing
@@ -54,7 +54,7 @@ namespace Sandbox.day01
 
             var total = 0;
             for (int i = 0; i < listA.Count; i++)
-            { 
+            {
                 var count = listB.Count(x => x == listA[i]);
                 total += listA[i] * count;
             }

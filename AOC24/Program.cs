@@ -1,15 +1,15 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using Sandbox.day01;
+using AOC24.Days;
+using AOC24.Days.Day01;
+using AOC24.Days.Day02;
 
 internal class Program
 {
-	private static void Main(string[] args)
-	{
-		var dayx = new day02();
-		day02.Part02(); 
-	}
-
+    private static void Main(string[] args)
+    {
+        
+    }
 }
 

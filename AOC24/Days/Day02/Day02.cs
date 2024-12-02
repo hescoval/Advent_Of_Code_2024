@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sandbox.day01
+namespace AOC24.Days.Day02
 {
-    internal class day02
+    internal class Day02
     {
-
         public static void Part01()
         {
             var Input = File.ReadAllLines("test.txt");
@@ -17,7 +16,7 @@ namespace Sandbox.day01
             foreach (var line in Input)
             {
                 bool safe = true;
-                List<int> list = new();
+                List<int> list = [];
                 var split_line = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var number in split_line)
@@ -41,17 +40,14 @@ namespace Sandbox.day01
 
             Console.WriteLine(safe_sum);
         }
-
-
-
         public static bool Ordered(List<int> list)
         {
             var asc = list.OrderBy(list => list).ToList();
             var dsc = list.OrderByDescending(list => list).ToList();
 
-            if(list.SequenceEqual(asc) || list.SequenceEqual(dsc))
+            if (list.SequenceEqual(asc) || list.SequenceEqual(dsc))
                 return true;
-            
+
             return false;
         }
 
@@ -68,16 +64,15 @@ namespace Sandbox.day01
         }
         public static void Part02()
         {
-            var Input = File.ReadAllLines("input.txt");
+            var Input = File.ReadAllLines("test.txt");
             var safe_sum = 0;
 
             foreach (var line in Input)
             {
-                bool safe = true;
-                List<int> list = new();
+                List<int> list = [];
                 var split_line = line.Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
-                foreach(var number in split_line)
+                foreach (var number in split_line)
                     list.Add(int.Parse(number));
 
                 if (List_Validator(list))
