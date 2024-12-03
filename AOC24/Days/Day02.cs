@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AOC24.Days.Day02
+namespace AOC24.Days
 {
     internal class Day02
     {
@@ -64,7 +64,7 @@ namespace AOC24.Days.Day02
         }
         public static void Part02()
         {
-            var Input = File.ReadAllLines("test.txt");
+            var Input = File.ReadAllLines("message.txt");
             var safe_sum = 0;
 
             foreach (var line in Input)
@@ -77,6 +77,7 @@ namespace AOC24.Days.Day02
 
                 if (List_Validator(list))
                 {
+                    Console.WriteLine(string.Join(" ", list));
                     safe_sum++;
                     continue;
                 }
@@ -87,6 +88,7 @@ namespace AOC24.Days.Day02
                     list_copy.RemoveAt(i);
                     if (List_Validator(list_copy))
                     {
+                        Console.WriteLine(string.Join(" ", list));
                         safe_sum++;
                         break;
                     }

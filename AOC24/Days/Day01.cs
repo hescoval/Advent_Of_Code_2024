@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AOC24.Days.Day01
+namespace AOC24.Days
 {
     internal class Day01
     {
-
         public static void Part01()
         {
             var Input = File.ReadAllLines("test.txt");
@@ -50,8 +49,8 @@ namespace AOC24.Days.Day01
                 int dig_1 = int.Parse(split_line[0]);
                 int dig_2 = int.Parse(split_line[1]);
 
-                
-                if(dic.ContainsKey(dig_1))
+
+                if (dic.ContainsKey(dig_1))
                     dic[dig_1]++;
                 else
                     dic.Add(dig_1, 1);
@@ -61,14 +60,14 @@ namespace AOC24.Days.Day01
 
             foreach (var number in listB)
             {
-                if(dic.ContainsKey(number))
+                if (dic.ContainsKey(number))
                     count += number * dic[number];
             }
 
-            foreach(var key in dic.Keys)
+            foreach (var key in dic.Keys)
             {
                 Console.WriteLine($"{key} -> {dic[key]}");
-            }  
+            }
 
             Console.WriteLine(count);
         }
