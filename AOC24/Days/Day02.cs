@@ -77,7 +77,6 @@ namespace AOC24.Days
 
                 if (List_Validator(list))
                 {
-                    Console.WriteLine(string.Join(" ", list));
                     safe_sum++;
                     continue;
                 }
@@ -88,7 +87,6 @@ namespace AOC24.Days
                     list_copy.RemoveAt(i);
                     if (List_Validator(list_copy))
                     {
-                        Console.WriteLine(string.Join(" ", list));
                         safe_sum++;
                         break;
                     }
