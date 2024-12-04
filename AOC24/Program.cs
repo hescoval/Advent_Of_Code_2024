@@ -8,10 +8,16 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        bool is_test = args.Length > 0;
-        string file = is_test ? "test.txt" : "input.txt";
+        bool is_real = args.Length > 0;
+        string file = is_real ? "input.txt" : "test.txt";
 
-        Day03.Part02(file);
+        Day04.Part01(file);
+
+        Console.WriteLine();
+        Console.WriteLine("----------------------");
+        Console.WriteLine();
+
+        Day04.Part02(file);
     }
 }
 
