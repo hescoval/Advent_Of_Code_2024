@@ -11,13 +11,13 @@ internal class Program
         bool is_real = args.Length > 0;
         string file = is_real ? "input.txt" : "test.txt";
 
-        Day04.Part01(file);
+        Day05.Part01(file);
 
         Console.WriteLine();
         Console.WriteLine("----------------------");
         Console.WriteLine();
 
-        Day04.Part02(file);
+        Day05.Part02(file);
     }
 }
 
