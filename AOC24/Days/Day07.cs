@@ -48,16 +48,17 @@ namespace AOC24.Days
                             result *= nums[i];
                             break;
                         case '|':
-                        {
                             string result_to_string = result.ToString();
                             string next_num = nums[i].ToString();
-
                             result = double.Parse(result_to_string + next_num);
-                        }
                             break;
                     }
-
+                    if(result > target)
+                    {
+                        break;
+                    }
                 }
+
                 if(result == target)
                 {
                     return true;
@@ -71,6 +72,7 @@ namespace AOC24.Days
         {
             var Input = File.ReadAllLines(target_file);
             double result = 0;
+            var loop = 0;
 
             foreach (var line in Input)
             {
@@ -87,6 +89,7 @@ namespace AOC24.Days
 
                 if(PossibleCalculation(perms, list, target))
                 {
+                    Console.WriteLine($"Reading line {loop}");
                     result += target;
                 }
 
@@ -98,7 +101,7 @@ namespace AOC24.Days
         {
             var Input = File.ReadAllLines(target_file);
             double result = 0;
-
+            var loop = 0;
             foreach (var line in Input)
             {
                 var lineSplit = line.Split(':');
@@ -112,6 +115,7 @@ namespace AOC24.Days
 
                 var perms = PossiblePermutations(list.Count - 1, ['*', '+', '|']);
 
+                    Console.WriteLine($"Reading line {loop++}");
                 if (PossibleCalculation(perms, list, target))
                 {
                     result += target;
