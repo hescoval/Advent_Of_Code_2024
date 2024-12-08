@@ -39,14 +39,9 @@ namespace AOC24.Days
             return coord.x >= 0 && coord.x < MapLimits.x && coord.y >= 0 && coord.y < MapLimits.y;
         }
 
-        private static (int x, int y) Delta1( (int x, int y) A, (int x, int y) B)
+        private static (int x, int y) Delta( (int x, int y) A, (int x, int y) B)
         {
             return (A.x - B.x, A.y - B.y);
-        }
-
-        private static (int x, int y) Delta2( (int x, int y) A, (int x, int y) B)
-        {
-            return (B.x - A.x, B.y - A.y);
         }
 
         private static void CalculateAntiNodes(List< (int x, int y) > Locs, HashSet< (int x, int y) > antiNodes, bool unique)
@@ -61,17 +56,16 @@ namespace AOC24.Days
                         antiNodes.Add(Locs[j]);
                     }
 
-                    var deltaNode1 = Delta1(Locs[i], Locs[j]);
-                    var deltaNode2 = Delta2(Locs[i], Locs[j]);
+                    var delta = Delta(Locs[i], Locs[j]);
 
-                    (int x, int y) antiNode1 = (Locs[i].x + deltaNode1.x, Locs[i].y + deltaNode1.y);
-                    (int x, int y) antiNode2 = (Locs[i].x + 2 * deltaNode2.x, Locs[i].y + 2 * deltaNode2.y);
+                    (int x, int y) antiNode1 = (Locs[i].x + delta.x, Locs[i].y + delta.y);
+                    (int x, int y) antiNode2 = (Locs[i].x + (2 * -delta.x), Locs[i].y + (2 * -delta.y));
 
                     while(InBounds(antiNode1))
                     {
                         antiNodes.Add(antiNode1);
-                        antiNode1.x += deltaNode1.x;
-                        antiNode1.y += deltaNode1.y;
+                        antiNode1.x += delta.x;
+                        antiNode1.y += delta.y;
                         if (unique)
                             break;
                     }
@@ -79,8 +73,8 @@ namespace AOC24.Days
                     while(InBounds(antiNode2))
                     {
                         antiNodes.Add(antiNode2);
-                        antiNode2.x += deltaNode2.x;
-                        antiNode2.y += deltaNode2.y;
+                        antiNode2.x += -delta.x;
+                        antiNode2.y += -delta.y;
                         if (unique)
                             break;
                     }
