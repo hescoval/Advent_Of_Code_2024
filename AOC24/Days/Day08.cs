@@ -49,7 +49,7 @@ namespace AOC24.Days
             return (B.x - A.x, B.y - A.y);
         }
 
-        private static void CalculateAntiNodes(string[] Input, List< (int x, int y) > Locs, HashSet< (int x, int y) > antiNodes, bool unique)
+        private static void CalculateAntiNodes(List< (int x, int y) > Locs, HashSet< (int x, int y) > antiNodes, bool unique)
         {
             for (int i = 0; i < Locs.Count; i++)
             {
@@ -99,7 +99,7 @@ namespace AOC24.Days
             foreach(var loc in Locs)
             {
                 List<(int x, int y)> list = loc.Value;
-                CalculateAntiNodes(Input, list, AntiNodes, true);
+                CalculateAntiNodes(list, AntiNodes, true);
             }
 
             Console.WriteLine(AntiNodes.Count);
@@ -116,7 +116,7 @@ namespace AOC24.Days
             foreach (var loc in Locs)
             {
                 List<(int x, int y)> list = loc.Value;
-                CalculateAntiNodes(Input, list, AntiNodes, false);
+                CalculateAntiNodes(list, AntiNodes, false);
             }
             Console.WriteLine(AntiNodes.Count);
         }
