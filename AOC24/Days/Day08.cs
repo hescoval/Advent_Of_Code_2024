@@ -10,10 +10,11 @@ namespace AOC24.Days
 
     internal class Day08
     {
+        static (int x, int y) MapLimits { get; set; }
+
         private static Dictionary<char, List<(int x, int y)>> FetchLocations(string[] input)
         {
             Dictionary<char, List<(int x, int y)>> ret = [];
-
 
             for(int i = 0; i < input.Length; i++)
             {
@@ -33,40 +34,40 @@ namespace AOC24.Days
             return ret;
         }
 
-
-        private static bool InBounds( (int x, int y) coord, string[] input)
+        private static bool InBounds( (int x, int y) coord)
         {
-            return coord.x >= 0 && coord.x < input[0].Length && coord.y >= 0 && coord.y < input.Length;
+            return coord.x >= 0 && coord.x < MapLimits.x && coord.y >= 0 && coord.y < MapLimits.y;
         }
 
-        private static (int x, int y) Delta1((int x, int y) A, (int x, int y) B)
+        private static (int x, int y) Delta1( (int x, int y) A, (int x, int y) B)
         {
             return (A.x - B.x, A.y - B.y);
         }
 
-        private static (int x, int y) Delta2((int x, int y) A, (int x, int y) B)
+        private static (int x, int y) Delta2( (int x, int y) A, (int x, int y) B)
         {
             return (B.x - A.x, B.y - A.y);
         }
 
-        private static void CalculateAntiNodes(string[] Input, List<(int x, int y)> Locs, HashSet<(int x, int y)> antiNodes, bool unique)
+        private static void CalculateAntiNodes(string[] Input, List< (int x, int y) > Locs, HashSet< (int x, int y) > antiNodes, bool unique)
         {
             for (int i = 0; i < Locs.Count; i++)
             {
                 for (int j = i + 1; j < Locs.Count; j++)
                 {
-                    var x1 = Locs[i].x;
-                    var y1 = Locs[i].y;
-                    var x2 = Locs[j].x;
-                    var y2 = Locs[j].y;
+                    if(!unique)
+                    {
+                        antiNodes.Add(Locs[i]);
+                        antiNodes.Add(Locs[j]);
+                    }
 
                     var deltaNode1 = Delta1(Locs[i], Locs[j]);
                     var deltaNode2 = Delta2(Locs[i], Locs[j]);
 
-                    (int x, int y) antiNode1 = (x1 + deltaNode1.x, y1 + deltaNode1.y);
-                    (int x, int y) antiNode2 = (x1 + 2 * deltaNode2.x, y1 + 2 * deltaNode2.y);
+                    (int x, int y) antiNode1 = (Locs[i].x + deltaNode1.x, Locs[i].y + deltaNode1.y);
+                    (int x, int y) antiNode2 = (Locs[i].x + 2 * deltaNode2.x, Locs[i].y + 2 * deltaNode2.y);
 
-                    while(InBounds(antiNode1, Input))
+                    while(InBounds(antiNode1))
                     {
                         antiNodes.Add(antiNode1);
                         antiNode1.x += deltaNode1.x;
@@ -75,7 +76,7 @@ namespace AOC24.Days
                             break;
                     }
 
-                    while(InBounds(antiNode2, Input))
+                    while(InBounds(antiNode2))
                     {
                         antiNodes.Add(antiNode2);
                         antiNode2.x += deltaNode2.x;
@@ -90,6 +91,8 @@ namespace AOC24.Days
         public static void Part01(string target_file)
         {
             var Input = File.ReadAllLines(target_file);
+            MapLimits = (Input[0].Length, Input.Length);
+
             var Locs = FetchLocations(Input);
             HashSet<(int x, int y)> AntiNodes = [];
 
@@ -105,6 +108,7 @@ namespace AOC24.Days
         public static void Part02(string target_file)
         {
             var Input = File.ReadAllLines(target_file);
+            MapLimits = (Input[0].Length, Input.Length);
 
             var Locs = FetchLocations(Input);
             HashSet<(int x, int y)> AntiNodes = [];
@@ -112,10 +116,6 @@ namespace AOC24.Days
             foreach (var loc in Locs)
             {
                 List<(int x, int y)> list = loc.Value;
-                foreach(var (x, y) in list)
-                {
-                    AntiNodes.Add((x, y));
-                }
                 CalculateAntiNodes(Input, list, AntiNodes, false);
             }
             Console.WriteLine(AntiNodes.Count);
