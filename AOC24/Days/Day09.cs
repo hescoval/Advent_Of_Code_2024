@@ -45,6 +45,7 @@ namespace AOC24.Days
             while(real_index < digitSum(line))
             {
                 var needed = line[left] - 48;
+
                 if (left % 2 == 0)
                 {
                     while (needed > 0 && real_index < digitSum(line))
@@ -78,36 +79,41 @@ namespace AOC24.Days
             Console.WriteLine(result);
         }
 
-        public static void Part02(string target_file)
-        {
-            var Input = File.ReadAllLines(target_file);
-            var line = Input[0];
 
-            Dictionary<int, (int item_id, int amount)> files = [];
-            Dictionary<int, int> blankSpaces = [];
+        public static void FetchDictionaries(string line, out Dictionary<int, (int item_id, int amount)> files, out Dictionary<int, int> blankSpaces)
+        {
+            files = [];
+            blankSpaces = [];
+
             var start_pos = 0;
             var item_id = 0;
-            double result = 0;
 
             for (int i = 0; i < line.Length; i++)
             {
                 var amount = line[i] - 48;
-                if(i % 2 == 0)
+                if (i % 2 == 0)
                 {
-                    if(amount > 0)
+                    if (amount > 0)
                         files.Add(start_pos, (item_id, amount));
-                    start_pos += amount;
                     item_id++;
                 }
                 else
                 {
-                    if(amount > 0)
+                    if (amount > 0)
                         blankSpaces.Add(start_pos, amount);
-                    start_pos += amount;
                 }
+                start_pos += amount;
             }
-
+        }
+        public static void Part02(string target_file)
+        {
+            var Input = File.ReadAllLines(target_file);
+            var line = Input[0];
+            FetchDictionaries(line, out var files, out var blankSpaces);
             Dictionary<int, (int item_id, int amount)> final_list = [];
+
+            double result = 0;
+
 
             foreach (var file in files.Reverse())
             {
@@ -133,6 +139,7 @@ namespace AOC24.Days
                         break;
                     }
                 }
+
                 if(remove)
                 {
                     blankSpaces.Remove(blank_key);
@@ -153,7 +160,6 @@ namespace AOC24.Days
                 {
                     result += i * file.Value.item_id;
                 }
-                Console.WriteLine($"File start pos = {file.Key} , File ID = {file.Value.item_id} File Quantity =  {file.Value.amount}");
             }
             Console.WriteLine(result);
         }
