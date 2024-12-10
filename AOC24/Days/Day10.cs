@@ -11,7 +11,6 @@ namespace AOC24.Days
 
     internal class Day10
     {
-        static Dictionary<(int x, int y), bool> visited;
         static Dictionary<(int x, int y), HashSet<(int x, int y)>> UniqueZeroNine;
         static Dictionary<(int x, int y), int> zeronine;
         static (int x, int y) MapLimits { get; set; }
@@ -23,7 +22,7 @@ namespace AOC24.Days
             (-1, 0)
         };
 
-        private static bool InBounds( (int x, int y) coord)
+        private static bool InBounds((int x, int y) coord)
         {
             return coord.x >= 0 && coord.x < MapLimits.x && coord.y >= 0 && coord.y < MapLimits.y;
         }
@@ -34,8 +33,6 @@ namespace AOC24.Days
             {
                 return;
             }
-
-            visited[current] = true;
 
             if (required == '9')
             {
@@ -52,7 +49,6 @@ namespace AOC24.Days
                     zeronine[start] = 1;
                 }
                 UniqueZeroNine[start].Add(current);
-                visited.Remove(current);
                 return;
             }
 
@@ -61,15 +57,12 @@ namespace AOC24.Days
                 var next = (current.x + direction.x, current.y + direction.y);
                 DFS(input, next, (char)(required + 1), start);
             }
-
-            visited.Remove(current);
         }
 
         public static void Part01(string target_file)
         {
             var Input = File.ReadAllLines(target_file);
             MapLimits = (Input[0].Length, Input.Length);
-            visited = [];
             zeronine = [];
             UniqueZeroNine = [];
 
@@ -81,7 +74,7 @@ namespace AOC24.Days
                 {
                     if (Input[i][j] == '0')
                     {
-                        foreach(var direction in Directions)
+                        foreach (var direction in Directions)
                             DFS(Input, (j + direction.x, i + direction.y), '1', (j, i));
                     }
                 }
@@ -92,12 +85,10 @@ namespace AOC24.Days
             Console.WriteLine(result);
         }
 
-
         public static void Part02(string target_file)
         {
             var Input = File.ReadAllLines(target_file);
             MapLimits = (Input[0].Length, Input.Length);
-            visited = [];
             zeronine = [];
             UniqueZeroNine = [];
 
@@ -119,6 +110,6 @@ namespace AOC24.Days
                 result += node.Value;
 
             Console.WriteLine(result);
+            }
         }
-    }
 }
