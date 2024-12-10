@@ -92,8 +92,6 @@ namespace AOC24.Days
             zeronine = [];
             UniqueZeroNine = [];
 
-            List<(int x, int y)> Visited = [];
-
             for (int i = 0; i < MapLimits.y; i++)
             {
                 for (int j = 0; j < MapLimits.x; j++)
