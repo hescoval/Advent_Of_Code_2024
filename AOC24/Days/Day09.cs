@@ -80,6 +80,15 @@ namespace AOC24.Days
         }
 
 
+        public static double ArithmeticSeries(int x, int amount, int value)
+        {
+            int y = x + amount - 1;
+            var count = y - x + 1;
+            var sum = count * (x + y) / 2;
+
+            return sum * value;
+        }
+
         public static void FetchDictionaries(string line, out Dictionary<int, (int item_id, int amount)> files, out Dictionary<int, int> blankSpaces)
         {
             files = [];
@@ -128,10 +137,10 @@ namespace AOC24.Days
                         break;
                     if (blank.Value >= file.Value.amount)
                     {
-                        final_list.Add(blank.Key, (file.Value.item_id, file.Value.amount));
+                        result += ArithmeticSeries(blank.Key, file.Value.amount, file.Value.item_id);
                         remove = true;
                         blank_key = blank.Key;
-                        if(blank.Value > file.Value.amount)
+                        if (blank.Value > file.Value.amount)
                         {
                             to_add = true;
                             to_Add = (blank.Key + file.Value.amount, blank.Value - file.Value.amount);
@@ -140,7 +149,7 @@ namespace AOC24.Days
                     }
                 }
 
-                if(remove)
+                if (remove)
                 {
                     blankSpaces.Remove(blank_key);
                     if (to_add)
@@ -150,15 +159,7 @@ namespace AOC24.Days
                 }
                 else
                 {
-                    final_list.Add(file.Key, (file.Value.item_id, file.Value.amount));
-                }
-            }
-
-            foreach(var file in final_list)
-            {
-                for(int i = file.Key; i < file.Key + file.Value.amount; i++)
-                {
-                    result += i * file.Value.item_id;
+                    result += ArithmeticSeries(file.Key, file.Value.amount, file.Value.item_id);
                 }
             }
             Console.WriteLine(result);
