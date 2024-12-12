@@ -108,6 +108,6 @@ namespace AOC24.Days
                 result += node.Value;
 
             Console.WriteLine(result);
-            }
         }
+    }
 }

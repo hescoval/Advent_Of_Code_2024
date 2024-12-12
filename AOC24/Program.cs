@@ -5,6 +5,23 @@ using System.Text;
 using AOC24.Days;
 
 
+public class DefaultDictionary<TKey, TValue> : Dictionary<TKey, TValue> where TValue : new()
+{
+    public new TValue this[TKey key]
+    {
+        get
+        {
+            TValue val;
+            if (!TryGetValue(key, out val))
+            {
+                val = new TValue();
+                Add(key, val);
+            }
+            return val;
+        }
+        set { base[key] = value; }
+    }
+}
 internal class Program
 {
     private static void Main(string[] args)
@@ -14,7 +31,9 @@ internal class Program
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
-        Day10.Part01(file);
+
+        Day12.Part01(file);
+
         stopwatch.Stop();
         Console.WriteLine($"Elapsed time: {stopwatch.Elapsed.TotalMilliseconds} ms");
 
@@ -24,7 +43,9 @@ internal class Program
 
         stopwatch = new Stopwatch();
         stopwatch.Start();
-        Day10.Part02(file);
+
+        Day12.Part02(file);
+
         stopwatch.Stop();
         Console.WriteLine($"Elapsed time: {stopwatch.Elapsed.TotalMilliseconds} ms");
     }
