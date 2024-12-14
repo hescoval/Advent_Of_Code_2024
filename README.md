@@ -15,4 +15,5 @@ It's for fun and it got the job done in a short amount of time.** 😀
 This is mostly for those that are curious.
 If you want to look at the code, experiment with it, change it, etc. be my guest.
 
+# A small picture of what we had to find in Day 14 of this year.
 ![Screenshot 2024-12-14 072645](https://github.com/user-attachments/assets/4ba7cb0d-e7e5-4948-ac1a-30b2db996e17)
