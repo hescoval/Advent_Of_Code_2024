@@ -32,7 +32,7 @@ internal class Program
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        //Day14.Part01(file);
+        Day15.Part01(file);
 
         stopwatch.Stop();
         Console.WriteLine($"Elapsed time: {stopwatch.Elapsed.TotalMilliseconds} ms");
@@ -44,7 +44,7 @@ internal class Program
         stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        Day14.Part02(file);
+        Day15.Part02(file);
 
         stopwatch.Stop();
         Console.WriteLine($"Elapsed time: {stopwatch.Elapsed.TotalMilliseconds} ms");
